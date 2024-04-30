@@ -12,7 +12,7 @@ This repository contains a free, open source GIF to spritesheets converter. Whet
 
 #### If it's your first time running the program
 
-1. Download and move the `Gif to Sheet.jar` file into an appropriate folder of your choice.
+1. <a href="https://drive.google.com/file/d/13Mii4ytiztq81bHobBdiHJ8KJXSffJoJ/view?usp=sharing">Download</a> and move the `Gif to Sheet.jar` file into an appropriate folder of your choice.
 2. Click it twice to run it.  
 ![Regular JAR file example](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/b1c3d13f-98f2-495d-ae8d-24ca7757e450)
 3. You'll notice it will make a new folder, `io`, in the same folder it's in.
