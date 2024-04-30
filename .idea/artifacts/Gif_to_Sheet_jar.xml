@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Gif to Sheet:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Gif_to_Sheet_jar</output-path>
+    <root id="archive" name="Gif to Sheet.jar">
+      <element id="module-output" name="Gif to Sheet" />
+    </root>
+  </artifact>
+</component>
