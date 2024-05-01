@@ -1,9 +1,7 @@
+##### Voltar à versão em Inglês
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/ApenasOLinco/Geef2Sheet/blob/master/README.md)
 
 ## Geef2Sheet :\)
-
-![WalkingDuck](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/5701787d-d20f-41e6-925a-4872732012a8)  
-Esse gif não é meu, encontrei ele online
 
 ### Descrição
 
@@ -27,10 +25,11 @@ Esse repositório contém um conversor de GIF para spritesheets gratuito e de c�
 #### Se você já rodou o programa ao menos uma vez
 
 1. Coloque o arquivo GIF que você deseja converter dentro da pasta `io/input`.  
-![GIF example](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/792031f9-b7c1-4b56-9b27-bfd1cd26f9ba)  
+![WalkingDuck](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/5701787d-d20f-41e6-925a-4872732012a8)  
+Esse gif não é meu, encontrei ele online  
 ![GIF to input example](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/c0dfc286-bffb-4f72-b526-d763045707dd)
-2. Rode o arquivo `Gif to Sheet.jar`.
-3. A spritesheet resultante vai estar dentro da pasta `io/output` com o sufixo " Frames", no formato PNG.  
+3. Rode o arquivo `Gif to Sheet.jar`.
+4. A spritesheet resultante vai estar dentro da pasta `io/output` com o sufixo " Frames", no formato PNG.  
 ![PNG Output example](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/62642e67-2ffa-4de9-ac26-3d34b4bf8bc9)  
 ![WalkingDuck Frames](https://github.com/ApenasOLinco/Geef2Sheet/assets/120327456/1cccb9a9-16eb-41cb-9863-d83c083fc50f)
 
