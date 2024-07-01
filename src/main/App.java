@@ -16,6 +16,22 @@ public class App {
             final AppWindow appWindow = new AppWindow();
             appWindow.setVisible(true);
         });
+//
+//        boolean exit = false;
+//
+//        if (!INPUT_FOLDER.exists()) {
+//            System.out.println(INPUT_FOLDER.mkdirs());
+//            exit = true;
+//        }
+//        if (!OUTPUT_FOLDER.exists()) {
+//            System.out.println(OUTPUT_FOLDER.mkdirs());
+//            exit = true;
+//        }
+//
+//        if(exit) System.exit(0);
+//
+//        InputManager inputManager = new InputManager();
+//        inputManager.process();
     }
 
     public static File getInputFolder() {
