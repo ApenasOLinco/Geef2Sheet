@@ -1,3 +1,5 @@
+package io;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,7 +11,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 public class InputManager {
-    private static final File INPUT_FILE = App.getInputFolder();
+    private static final File INPUT_FILE = main.App.getInputFolder();
     
     private final OutputManager outputManager = new OutputManager();
     private final File[] gifFiles;
