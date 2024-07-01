@@ -1,19 +1,19 @@
 package io;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-
 public class InputManager {
     private static final File INPUT_FILE = main.App.getInputFolder();
     
     private final OutputManager outputManager = new OutputManager();
+
     private final File[] gifFiles;
     
     private final HashMap<Image[], String> bufferedGIFs;
