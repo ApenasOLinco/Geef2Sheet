@@ -1,10 +1,9 @@
 package ui;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -15,87 +14,145 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.TransferHandler;
+
+import io.event.InputNotifier.EventType;
+import main.App;
+
 public class UploadPanel extends JPanel {
-    UploadPanel() {
-        initComponents();
-        initBorder();
-        initTransferHandling();
-    }
 
-    private void initTransferHandling() {
-        initTransferHandler();
-        initDropTarget();
-    }
+	private UploadLeftPanel leftPanel;
+	private JPanel displayPanel;
+	private JSplitPane splitPane;
 
-    private void initDropTarget() {
-        this.setDropTarget(new DropTarget(this, new DropTarget(this, new DropTargetAdapter() {
-            @Override
-            public void drop(DropTargetDropEvent dtde) {
-                // Drop validation
-                final TransferHandler.TransferSupport transferSupport = new TransferHandler.TransferSupport(UploadPanel.this, dtde.getTransferable());
+	UploadPanel() {
+		initComponents();
+		initTransferHandling();
+	}
 
-                if (getTransferHandler().canImport(transferSupport))
-                    dtde.acceptDrop(DnDConstants.ACTION_COPY);
-                else {
-                    dtde.rejectDrop();
-                    return;
-                }
+	private void initComponents() {
+		setLayout(new BorderLayout());
+		initSplitPane();
+		initTitleLabel();
+		initLeftPanel();
+		initDisplayPanel();
+	}
 
-                // Import
-                getTransferHandler().importData(UploadPanel.this, dtde.getTransferable());
-            }
-        })));
-    }
+	private void initTransferHandling() {
+		initDropTarget();
+		initTransferHandler();
+	}
 
-    private void initTransferHandler() {
-        this.setTransferHandler(new TransferHandler(null) {
-            @Override
-            public boolean canImport(TransferSupport support) {
-                return Arrays.stream(support.getDataFlavors()).anyMatch(DataFlavor::isFlavorJavaFileListType);
-            }
+	private void initDropTarget() {
+		this.setDropTarget(new DropTarget(this, new DropTargetAdapter() {
+			@Override
+			public void drop(DropTargetDropEvent dtde) {
+				// Drop validation
+				final TransferHandler.TransferSupport transferSupport = new TransferHandler.TransferSupport(
+						UploadPanel.this, dtde.getTransferable());
 
-            @Override
-            public boolean importData(JComponent comp, Transferable t) {
-                try {
-                    @SuppressWarnings("unchecked") var files = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
+				if (getTransferHandler().canImport(transferSupport))
+					dtde.acceptDrop(DnDConstants.ACTION_COPY);
+				else {
+					dtde.rejectDrop();
+					return;
+				}
 
-                    HashMap<String, ImageReader> readers = new HashMap<>();
+				// Import
+				getTransferHandler().importData(UploadPanel.this, dtde.getTransferable());
+			}
+		}));
+	}
 
-                    for (File file : files) {
-                        var suffix = file.getName().split("\\.")[1];
+	private void initTransferHandler() {
+		this.setTransferHandler(new TransferHandler(null) {
+			@Override
+			public boolean canImport(TransferSupport support) {
+				return Arrays.stream(support.getDataFlavors()).anyMatch(DataFlavor::isFlavorJavaFileListType);
+			}
 
-                        if (!readers.containsKey(suffix)) {
-                            readers.put(suffix, ImageIO.getImageReadersBySuffix(suffix).next());
-                        }
+			@Override
+			public boolean importData(JComponent comp, Transferable t) {
+				try {
+					@SuppressWarnings("unchecked")
+					var files = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
+					final boolean wasAdded = App.getInputManager().addFiles(files.toArray(new File[0]));
+					if (!wasAdded)
+						return false;
+				} catch (UnsupportedFlavorException e) {
+					System.err.printf("""
+							Tried getting transfer data of an invalid Flavor while importing %s.
+							   Tried flavor: %s
+							   Supported flavors: %s
+							""", t, DataFlavor.javaFileListFlavor, Arrays.toString(t.getTransferDataFlavors()));
 
-                        var reader = readers.get(suffix);
-                        reader.setInput(ImageIO.createImageInputStream(file));
-                        var image = reader.read(0).getScaledInstance(400, 400, Image.SCALE_FAST);
-                        JLabel label = new JLabel(new ImageIcon(image));
-                        label.setBorder(BorderFactory.createDashedBorder(null));
-                        UploadPanel.this.add(label, BorderLayout.CENTER);
-                    }
-                } catch (UnsupportedFlavorException | IOException e) {
-                    return false;
-                }
+					return false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					return false;
+				}
 
-                return true;
-            }
-        });
-    }
+				return true;
+			}
+		});
+	}
 
-    private void initBorder() {
-        final Border lineBorder = BorderFactory.createLineBorder(Color.RED);
-        this.setBorder(lineBorder);
-    }
+	private void initTitleLabel() {
+		final JLabel title = new JLabel("Upload Panel");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setOpaque(true);
+		title.setBackground(Color.LIGHT_GRAY);
+		this.add(title, BorderLayout.NORTH);
+	}
 
-    private void initComponents() {
-        setLayout(new BorderLayout());
-        final JLabel title = new JLabel("Upload Panel");
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        this.add(title, BorderLayout.NORTH);
-    }
+	private void initLeftPanel() {
+		leftPanel = new UploadLeftPanel();
+		splitPane.setLeftComponent(leftPanel);
+	}
+	
+	private void initDisplayPanel() {
+		displayPanel = new JPanel(new BorderLayout());
+		
+		App.getInputManager().getInputNotifier().subscribe(event -> {
+			File file = event.getFiles()[0];
+			ScalableLabel label = new ScalableLabel(new ImageIcon(file.getPath()));
+			label.setMinimumSize(new Dimension(32, 32));
+			
+			displayPanel.removeAll();
+			displayPanel.add(label, BorderLayout.CENTER);
+			
+			App.getAppWindow().queueRepaint(displayPanel);
+			displayPanel.revalidate();
+			
+		}, EventType.JLIST_FOCUS_CHANGED);
+		splitPane.setRightComponent(displayPanel);
+	}
+
+	private void initSplitPane() {
+		splitPane = new JSplitPane();
+		splitPane.setContinuousLayout(true);
+		add(splitPane);
+	}
+	
+	private static class ScalableLabel extends JLabel {
+		public ScalableLabel(ImageIcon imageIcon) {
+			super(imageIcon);
+		}
+
+		@Override
+		protected void paintComponent(Graphics g) {
+			ImageIcon icon = (ImageIcon) getIcon();
+			if (icon != null)
+				ImageUtil.drawImageScaledToCanvasRatio(icon.getImage(), this, g);
+			App.getAppWindow().queueRepaint(ScalableLabel.this);
+		}
+	}
 }
