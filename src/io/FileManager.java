@@ -13,14 +13,13 @@ public class FileManager {
     private final File OUTPUT_FOLDER = new File(OUTPUT_PATH);
 
     public void createIOFiles() {
-        if (!INPUT_FOLDER.exists()) {
+        if (!INPUT_FOLDER.exists()) 
             System.out.println(INPUT_FOLDER.mkdirs());
-        }
-        if (!OUTPUT_FOLDER.exists()) {
-            System.out.println(OUTPUT_FOLDER.mkdirs());
-        }
-    }
 
+        if (!OUTPUT_FOLDER.exists())
+            System.out.println(OUTPUT_FOLDER.mkdirs());
+    }
+    
     public Image getFileAsImage(File file) {
         Image image;
 
@@ -32,7 +31,7 @@ public class FileManager {
 
         return image;
     }
-
+    
     public String getInputPath() {
         return INPUT_PATH;
     }
