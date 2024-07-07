@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class InputManager {
+public class InputProcessor {
     private final ArrayList<File> inputFiles = new ArrayList<>();
 
     private final InputNotifier inputNotifier = new InputNotifier();
@@ -49,22 +49,6 @@ public class InputManager {
         return false;
     }
     
-	private Image[] bufferGIF(File gif, ImageReader reader) throws IOException {
-        ImageInputStream input = ImageIO.createImageInputStream(gif);
-        reader.setInput(input, false);
-
-        int gifLength = reader.getNumImages(true);
-        Image[] images = new Image[gifLength];
-        
-        for(int i = 0; i < gifLength; i++) {
-            BufferedImage image = reader.read(i);
-            images[i] = image;
-            System.out.println(STR."\{image.getWidth()}x\{image.getHeight()}");
-        }
-        
-        return images;
-    }
-
     public ArrayList<File> getInputFiles() {
         return inputFiles;
     }

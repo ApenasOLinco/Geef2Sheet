@@ -1,17 +1,17 @@
 package main;
 
 import io.FileManager;
-import io.InputManager;
-import io.OutputManager;
+import io.InputProcessor;
+import io.OutputProcessor;
 import ui.AppWindow;
 
 import javax.swing.*;
 
 public class App {
 	private static final FileManager FILE_MANAGER = new FileManager();
-	private static final InputManager INPUT_MANAGER = new InputManager();
-	private static final OutputManager OUTPUT_MANAGER = new OutputManager();
-	private static final AppWindow appWindow = new AppWindow();
+	private static final InputProcessor INPUT_PROCESSOR = new InputProcessor();
+	private static final OutputProcessor OUTPUT_PROCESSOR = new OutputProcessor();
+	private static final AppWindow APP_WINDOW = new AppWindow();
 
 	public static void main(String[] args) {
 		// First, the app has to make sure the input and output directories are existent
@@ -19,16 +19,16 @@ public class App {
 
 		// Program UI
 		SwingUtilities.invokeLater(() -> {
-			appWindow.setVisible(true);
+			APP_WINDOW.setVisible(true);
 		});
 
 		for (;;) {
 			try {
-				Thread.sleep(20);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			appWindow.repaintQueuedComponents();
+			APP_WINDOW.repaintQueuedComponents();
 		}
 	}
 
@@ -36,15 +36,15 @@ public class App {
 		return FILE_MANAGER;
 	}
 
-	public static InputManager getInputManager() {
-		return INPUT_MANAGER;
+	public static InputProcessor getInputProcessor() {
+		return INPUT_PROCESSOR;
 	}
 
-	public static OutputManager getOutputManager() {
-		return OUTPUT_MANAGER;
+	public static OutputProcessor getOutputProcessor() {
+		return OUTPUT_PROCESSOR;
 	}
 
 	public static AppWindow getAppWindow() {
-		return appWindow;
+		return APP_WINDOW;
 	}
 }

@@ -1,6 +1,5 @@
 package ui;
 
-import static java.lang.StringTemplate.STR;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -23,6 +22,7 @@ import main.App;
 public class UploadLeftPanel extends JPanel {
 	private JFileChooser fileChooser;
 	private JPanel bottomPanel;
+	private JList<File> fileJList;
 
 	public UploadLeftPanel() {
 		super();
@@ -49,10 +49,10 @@ public class UploadLeftPanel extends JPanel {
 
 	private void initJList() {
 		DefaultListModel<File> model = new DefaultListModel<>();
-		final JList<File> fileJList = getFileJList(model);
+		fileJList = getFileJList(model);
 
 		// Update the list on a new file import
-		App.getInputManager().getInputNotifier().subscribe(event-> {
+		App.getInputProcessor().getInputNotifier().subscribe(event-> {
 			var files = event.getFiles();
 			
 			for (File file : files) {
@@ -71,7 +71,7 @@ public class UploadLeftPanel extends JPanel {
 		JList<File> fileJList = new JList<>(model);
 
 		fileJList.getSelectionModel().addListSelectionListener(e -> {
-			App.getInputManager().getInputNotifier().notifyObservers(EventType.JLIST_FOCUS_CHANGED, fileJList.getSelectedValue());
+			App.getInputProcessor().getInputNotifier().notifyObservers(EventType.JLIST_FOCUS_CHANGED, fileJList.getSelectedValue());
 		});
 
 		return fileJList;
@@ -87,7 +87,7 @@ public class UploadLeftPanel extends JPanel {
 				return;
 
 			File[] selectedFiles = fileChooser.getSelectedFiles();
-			App.getInputManager().addFiles(selectedFiles);
+			App.getInputProcessor().addFiles(selectedFiles);
 		});
 
 		bottomPanel.add(pickAFileButton);
@@ -95,6 +95,11 @@ public class UploadLeftPanel extends JPanel {
 
 	private void initConvertButton() {
 		JButton convertButton = new JButton("Convert selected files");
+		convertButton.addActionListener(e -> {
+			var files = App.getInputProcessor().getInputFiles();
+			App.getOutputProcessor().process(files);
+		});
+		
 		bottomPanel.add(convertButton);
 	}
 }

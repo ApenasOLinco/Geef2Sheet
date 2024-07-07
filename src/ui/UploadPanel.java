@@ -84,7 +84,7 @@ public class UploadPanel extends JPanel {
 				try {
 					@SuppressWarnings("unchecked")
 					var files = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
-					final boolean wasAdded = App.getInputManager().addFiles(files.toArray(new File[0]));
+					final boolean wasAdded = App.getInputProcessor().addFiles(files.toArray(new File[0]));
 					if (!wasAdded)
 						return false;
 				} catch (UnsupportedFlavorException e) {
@@ -121,7 +121,7 @@ public class UploadPanel extends JPanel {
 	private void initDisplayPanel() {
 		displayPanel = new JPanel(new BorderLayout());
 		
-		App.getInputManager().getInputNotifier().subscribe(event -> {
+		App.getInputProcessor().getInputNotifier().subscribe(event -> {
 			File file = event.getFiles()[0];
 			ScalableLabel label = new ScalableLabel(new ImageIcon(file.getPath()));
 			label.setMinimumSize(new Dimension(32, 32));
