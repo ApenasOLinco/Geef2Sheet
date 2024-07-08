@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class InputNotifier {
+public class IONotifier {
 	
 	public enum EventType {
-		FILE_ADDED, FILE_REMOVED, JLIST_FOCUS_CHANGED;
+		FILE_ADDED, FILE_REMOVED, FILES_PROCESSED;
 	}
 	
-	public class InputNotifierEvent {
+	public class IONotifierEvent {
 		private EventType eventType;
 		
 		private File[] files;
 
-		public InputNotifierEvent(EventType type, File[] files) {
+		public IONotifierEvent(EventType type, File[] files) {
 			eventType = type;
 			this.files = files;
 			
@@ -41,22 +41,22 @@ public class InputNotifier {
 	}
 	
 
-    private final HashMap<EventType, ArrayList<InputObserver>> observers = new HashMap<>();
+    private final HashMap<EventType, ArrayList<IOObserver>> observers = new HashMap<>();
 
-    public InputNotifier() {
+    public IONotifier() {
         Arrays.stream(EventType.values()).forEach(event -> observers.put(event, new ArrayList<>()));
     }
 
-    public void subscribe(InputObserver observer, EventType eventType) {
+    public void subscribe(IOObserver observer, EventType eventType) {
         observers.get(eventType).add(observer);
     }
 
-    public void unsubscribe(InputObserver observer, EventType eventType) {
+    public void unsubscribe(IOObserver observer, EventType eventType) {
         observers.get(eventType).remove(observer);
     }
 
     public void notifyObservers(EventType eventType, File... files) {
-        observers.get(eventType).forEach(observer -> observer.update(new InputNotifierEvent(eventType, files)));
+        observers.get(eventType).forEach(observer -> observer.update(new IONotifierEvent(eventType, files)));
     }
 }
 
