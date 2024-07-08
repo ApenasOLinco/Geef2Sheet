@@ -1,7 +1,9 @@
 package io;
 
-import io.event.InputNotifier;
-import io.event.InputNotifier.EventType;
+import io.event.IONotifier;
+import io.event.IONotifier.EventType;
+import main.App;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -15,8 +17,6 @@ import java.util.ArrayList;
 
 public class InputProcessor {
     private final ArrayList<File> inputFiles = new ArrayList<>();
-
-    private final InputNotifier inputNotifier = new InputNotifier();
 
     public boolean addFiles(File... files) {
         return addFiles(null, files);
@@ -42,7 +42,7 @@ public class InputProcessor {
 
 
         if(addedFiles > 0) {
-            inputNotifier.notifyObservers(EventType.FILE_ADDED, files);
+            App.getIONotifier().notifyObservers(EventType.FILE_ADDED, files);
             return true;
         }
 
@@ -51,9 +51,5 @@ public class InputProcessor {
     
     public ArrayList<File> getInputFiles() {
         return inputFiles;
-    }
-
-    public InputNotifier getInputNotifier() {
-        return inputNotifier;
     }
 }
