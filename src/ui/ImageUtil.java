@@ -17,19 +17,22 @@ public class ImageUtil {
 	 * @param canvas the canvas to comport the image
 	 */
 	public static void drawImageScaledToCanvasRatio(Image image, Component canvas, Graphics g) {
+		if (image == null || canvas == null || g == null)
+			return;
+		
 		int imageWidth = image.getWidth(null);
 		int imageHeight = image.getHeight(null);
 		double imageAspect = (double) imageHeight / imageWidth;
-
+		
 		int canvasWidth = canvas.getWidth();
 		int canvasHeight = canvas.getHeight();
 		double canvasAspect = (double) canvasHeight / canvasWidth;
-
+		
 		int x1 = 0; // Top-left Xpos
 		int y1 = 0; // Top-left Ypos
 		int x2 = 0; // Bottom-right Xpos
 		int y2 = 0; // Bottom-right Ypos
-
+		
 		if (canvasAspect > imageAspect) {
 			y1 = canvasHeight;
 			// Keep image aspect ratio
@@ -37,7 +40,7 @@ public class ImageUtil {
 			y1 = (y1 - canvasHeight) / 2;
 		} else {
 			x1 = canvasWidth;
-
+			
 			// Keep image aspect ratio
 			canvasWidth = (int) (canvasHeight / imageAspect);
 			x1 = (x1 - canvasWidth) / 2;
@@ -45,7 +48,7 @@ public class ImageUtil {
 		
 		x2 = canvasWidth + x1;
 		y2 = canvasHeight + y1;
-
+		
 		g.drawImage(image, x1, y1, x2, y2, 0, 0, imageWidth, imageHeight, null);
 	}
 }
