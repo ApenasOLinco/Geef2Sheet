@@ -23,7 +23,8 @@ public class OutputProcessor {
 		ArrayList<File> processedFiles = new ArrayList<>(files.size());
 		
 		// @formatter:off
-		for(File file : files) {
+		for(int i = 0; i < files.size(); i ++) {
+			File file = files.get(i);
 			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName()} Frames.\{format}");
 			
 			if (outputFiles.contains(outputFile))
