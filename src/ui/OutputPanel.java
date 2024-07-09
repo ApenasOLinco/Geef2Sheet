@@ -15,35 +15,18 @@ import main.App;
 
 public class OutputPanel extends JPanel {
 	private JSplitPane splitPane = new JSplitPane();
-	private JList<File> outputJList = new JList<>();
 	private JPanel displayPanel = new JPanel(new BorderLayout());
+	private OutputLeftPanel leftPanel = new OutputLeftPanel(displayPanel);
 	
 	public OutputPanel() {
 		setLayout(new BorderLayout());
 		initSplitPane();
-		initOutputJList();
+		initLeftPanel();
 		initDisplayPanel();
 	}
 
-	private void initOutputJList() {
-		DefaultListModel<File> model = new DefaultListModel<>();
-		outputJList.setModel(model);
-		
-		outputJList.addListSelectionListener(e -> {
-			ScalableLabel label = (ScalableLabel) displayPanel.getComponent(0);
-			label.setIcon(new ImageIcon(outputJList.getSelectedValue().getPath()));
-		});
-		
-		App.getIONotifier().subscribe(event -> {
-			for(File file : event.getFiles()) {
-				model.addElement(file);
-			}
-			
-			App.getAppWindow().queueRepaint(outputJList);
-			outputJList.revalidate();
-		}, EventType.FILES_PROCESSED);
-		
-		splitPane.setLeftComponent(outputJList);
+	private void initLeftPanel() {
+		splitPane.setLeftComponent(leftPanel);
 	}
 
 	private void initSplitPane() {
@@ -53,8 +36,7 @@ public class OutputPanel extends JPanel {
 	
 	private void initDisplayPanel() {
 		ScalableLabel label = new ScalableLabel(null);
-		label.setMinimumSize(new Dimension(32, 32));
-		displayPanel.add(label );
+		displayPanel.add(label);
 		splitPane.setRightComponent(displayPanel);
 	}
 }
