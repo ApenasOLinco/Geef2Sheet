@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ import main.App;
 class ScalableLabel extends JLabel {
 	public ScalableLabel(ImageIcon imageIcon) {
 		super(imageIcon);
+		setMinimumSize(new Dimension(64, 64));
 	}
 	
 	@Override
