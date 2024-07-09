@@ -33,7 +33,7 @@ public class OutputProcessor {
 			if(asImageArray != null)
 				writeImagesToFile(asImageArray, outputFile);
 			
-			processedFiles.add(file);
+			processedFiles.add(outputFile);
 		}
 		// @formatter:on
 		if (processedFiles.size() > 0)
