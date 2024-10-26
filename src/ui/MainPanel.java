@@ -35,7 +35,7 @@ public class MainPanel extends JPanel {
     }
 
     private void initOutputPanel() {
-    	outputPanel = new OutputPanel();
+    	outputPanel = new OutputPanel(getSize());
     }
     
     private void initSizes() {

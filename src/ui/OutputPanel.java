@@ -19,7 +19,8 @@ public class OutputPanel extends JPanel {
 	private JPanel displayPanel = new JPanel(new BorderLayout());
 	private OutputLeftPanel leftPanel = new OutputLeftPanel(displayPanel);
 	
-	public OutputPanel() {
+	public OutputPanel(Dimension size) {
+		setSize(size);
 		setLayout(new BorderLayout());
 		initSplitPane();
 		initLeftPanel();
@@ -28,6 +29,8 @@ public class OutputPanel extends JPanel {
 
 	private void initSplitPane() {
 		splitPane.setContinuousLayout(true);
+		splitPane.setSize(getSize());
+		splitPane.setDividerLocation(.33);
 		add(splitPane);
 	}
 	
