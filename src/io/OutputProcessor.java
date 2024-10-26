@@ -37,16 +37,14 @@ public class OutputProcessor {
 		}
 
 		if (processedFiles.size() > 0)
-			App.getIONotifier().notifyObservers(io.event.IONotifier.EventType.FILES_PROCESSED,
-			processedFiles.toArray(new File[0]));
+			App.getIONotifier().notifyObservers(io.event.IONotifier.EventType.FILES_PROCESSED, processedFiles.toArray(new File[0]));
 	}
 	
 	private Image[] getGifFileAsImageArray(File file) {
 		try {
 			ImageReader reader = ImageIO.getImageReadersByFormatName("gif").next();
 			
-			ImageInputStream input;
-			input = ImageIO.createImageInputStream(file);
+			ImageInputStream input = ImageIO.createImageInputStream(file);
 			reader.setInput(input, false);
 			
 			int gifLength = reader.getNumImages(true);
