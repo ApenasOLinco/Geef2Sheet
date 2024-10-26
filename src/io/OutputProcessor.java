@@ -67,9 +67,11 @@ public class OutputProcessor {
 			int imagesPerLine = OutputConfigurations.getNumberOfColumns();
 			String format = OutputConfigurations.getFileFormat();
 			
+			int hGap = OutputConfigurations.gethGap();
+			int vGap = OutputConfigurations.getvGap();
 			int imageWidth = imgs[0].getWidth(null);
 			int imageHeight = imgs[0].getHeight(null);
-			int lineWidth = imageWidth * imagesPerLine;
+			int lineWidth = imageWidth * imagesPerLine + hGap * imagesPerLine;
 			int lineHeight = imageHeight * (int) Math.ceil((double) imgs.length / imagesPerLine);
 			
 			BufferedImage outputImage = new BufferedImage(lineWidth, lineHeight, BufferedImage.TYPE_INT_ARGB);
@@ -77,8 +79,10 @@ public class OutputProcessor {
 			for (int i = 0; i < imgs.length; i++) {
 				Image img = imgs[i];
 				
-				int x = (i % imagesPerLine) * imageWidth;
-				int y = (i / imagesPerLine) * imageHeight;
+				int currentImageInLine = i % imagesPerLine;
+				int currentLine = i / imagesPerLine;
+				int x = currentImageInLine * imageWidth + hGap * currentImageInLine;
+				int y = currentLine * imageHeight + vGap * currentLine;
 				
 				outputImage.getGraphics().drawImage(img, x, y, null);
 			}
