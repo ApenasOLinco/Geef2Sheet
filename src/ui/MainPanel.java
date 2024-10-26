@@ -30,7 +30,7 @@ public class MainPanel extends JPanel {
     }
 
     private void initOptionsPanel() {
-        optionsPanel = new JPanel();
+        optionsPanel = new OptionsPanel();
         optionsPanel.add(new JLabel("Options Panel"), BorderLayout.NORTH);
     }
 

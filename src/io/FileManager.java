@@ -3,6 +3,7 @@ package io;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -30,6 +31,10 @@ public class FileManager {
 		}
 		
 		return image;
+	}
+	
+	public void createFiles(File... files) {
+		Arrays.stream(files).forEach(file -> file.mkdirs());
 	}
 	
 	public String getInputPath() {

@@ -7,6 +7,7 @@ import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -15,25 +16,12 @@ import main.App;
 
 public class OutputLeftPanel extends JPanel {
 	JList<File> outputJList = new JList<>();
-	JButton saveButton = new JButton("Save files");
-	JPanel bottomPanel = new JPanel();
 	JPanel displayPanel;
 	
 	public OutputLeftPanel(JPanel displayPanel) {
 		this.displayPanel = displayPanel;
 		setLayout(new BorderLayout());
 		initJList();
-		initBottomPanel();
-		initSaveButton();
-	}
-
-	private void initBottomPanel() {
-		bottomPanel.setLayout(new FlowLayout());
-		add(bottomPanel, BorderLayout.SOUTH);
-	}
-
-	private void initSaveButton() {
-		bottomPanel.add(saveButton);
 	}
 
 	private void initJList() {

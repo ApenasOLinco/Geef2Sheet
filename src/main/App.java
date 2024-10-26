@@ -12,7 +12,6 @@ import javax.swing.*;
 public class App {
 	private static final IONotifier IO_NOTIFIER = new IONotifier();
 	private static final FileManager FILE_MANAGER = new FileManager();
-	private static final OutputConfigurations OUTPUT_CONFIGURATIONS = new OutputConfigurations();
 	private static final InputProcessor INPUT_PROCESSOR = new InputProcessor();
 	private static final OutputProcessor OUTPUT_PROCESSOR = new OutputProcessor();
 	private static final AppWindow APP_WINDOW = new AppWindow();
@@ -50,10 +49,6 @@ public class App {
 
 	public static AppWindow getAppWindow() {
 		return APP_WINDOW;
-	}
-
-	public static OutputConfigurations getOutputConfigurations() {
-		return OUTPUT_CONFIGURATIONS;
 	}
 
 	public static IONotifier getIONotifier() {

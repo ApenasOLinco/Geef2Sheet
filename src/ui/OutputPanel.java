@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.io.File;
 
 import javax.swing.DefaultListModel;
@@ -25,13 +26,13 @@ public class OutputPanel extends JPanel {
 		initDisplayPanel();
 	}
 
-	private void initLeftPanel() {
-		splitPane.setLeftComponent(leftPanel);
-	}
-
 	private void initSplitPane() {
 		splitPane.setContinuousLayout(true);
 		add(splitPane);
+	}
+	
+	private void initLeftPanel() {
+		splitPane.setLeftComponent(leftPanel);
 	}
 	
 	private void initDisplayPanel() {

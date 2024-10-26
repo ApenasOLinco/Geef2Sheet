@@ -1,7 +1,9 @@
 package io;
 
 public final class OutputConfigurations {
-	private int numberOfColumns = 3, hGap = 0, vGap = 0;
+	private int 
+		numberOfColumns = 15,
+		hGap = 0, vGap = 0;
 	private String fileFormat = "png";
 	
 	public int getNumberOfColumns() {

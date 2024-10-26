@@ -15,34 +15,33 @@ import javax.imageio.stream.ImageOutputStream;
 import main.App;
 
 public class OutputProcessor {
-	private int imagesPerLine = App.getOutputConfigurations().getNumberOfColumns();
-	private String format = App.getOutputConfigurations().getFileFormat();
+	private static final OutputConfigurations OUTPUT_CONFIGURATIONS = new OutputConfigurations();
+
 	private final ArrayList<File> outputFiles = new ArrayList<>();
 	
 	public void process(ArrayList<File> files) {
 		ArrayList<File> processedFiles = new ArrayList<>(files.size());
 		
-		// @formatter:off
 		for(int i = 0; i < files.size(); i ++) {
 			File file = files.get(i);
-			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName()} Frames.\{format}");
+			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OUTPUT_CONFIGURATIONS.getFileFormat()}");
 			
 			if (outputFiles.contains(outputFile))
 				continue;
 			
-			var asImageArray = getAsImageArray(file);
+			var asImageArray = getGifFileAsImageArray(file);
 			if(asImageArray != null)
 				writeImagesToFile(asImageArray, outputFile);
 			
 			processedFiles.add(outputFile);
 		}
-		// @formatter:on
+
 		if (processedFiles.size() > 0)
 			App.getIONotifier().notifyObservers(io.event.IONotifier.EventType.FILES_PROCESSED,
 			processedFiles.toArray(new File[0]));
 	}
 	
-	private Image[] getAsImageArray(File file) {
+	private Image[] getGifFileAsImageArray(File file) {
 		try {
 			ImageReader reader = ImageIO.getImageReadersByFormatName("gif").next();
 			
@@ -68,6 +67,10 @@ public class OutputProcessor {
 	
 	private void writeImagesToFile(Image[] imgs, File outputFile) {
 		try {
+			// Configurations
+			int imagesPerLine = OUTPUT_CONFIGURATIONS.getNumberOfColumns();
+			String format = OUTPUT_CONFIGURATIONS.getFileFormat();
+			
 			int imageWidth = imgs[0].getWidth(null);
 			int imageHeight = imgs[0].getHeight(null);
 			int lineWidth = imageWidth * imagesPerLine;
