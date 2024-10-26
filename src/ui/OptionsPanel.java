@@ -1,10 +1,8 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 
-import javax.naming.CompositeName;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,11 +10,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-
-import main.App;
+import javax.swing.SwingConstants;
 
 public class OptionsPanel extends JPanel {
 	JPanel contentPanel = new JPanel();
@@ -41,29 +37,27 @@ public class OptionsPanel extends JPanel {
 	}
 	
 	private void initNumberOfColumnsSpinner() {
-		SpinnerNumberModel columnsModel = new SpinnerNumberModel();
-		columnsModel.setMinimum(1);
-		numberOfColumnsSpinner.setModel(columnsModel);
-		contentPanel.add(numberOfColumnsSpinner);
+		createSpinner(numberOfColumnsSpinner, "Number of Columns: ");
 	}
 	
 	private void initGapSpinners() {
 		// Horizontal Spinner
-		createSpinner(horizontalGapSpinner, "Horizontal Gap:");
+		createSpinner(horizontalGapSpinner, "Horizontal Gap: ");
 		
 		// Vertical Spinner
-		createSpinner(verticalGapSpinner, "Vertical Gap:");
+		createSpinner(verticalGapSpinner, "Vertical Gap: ");
 	}
 	
 	private void createSpinner(JSpinner spinner, String labelText) {
-		Dimension spinnerMinimumSize = new Dimension(50, 20);
-		Dimension spinnerMaximumSize = new Dimension(500, 20);
+		Dimension spinnerMinimumSize = new Dimension(50, 25);
+		Dimension spinnerMaximumSize = new Dimension(500, 25);
 		
 		SpinnerNumberModel gapModel = new SpinnerNumberModel();
 		gapModel.setMinimum(0);
 		
 		JPanel container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.LINE_AXIS));
+		container.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		
 		spinner.setModel(gapModel);
 		spinner.setMinimumSize(spinnerMinimumSize);
@@ -71,6 +65,7 @@ public class OptionsPanel extends JPanel {
 		spinner.setPreferredSize(spinnerMaximumSize);
 		
 		JLabel label = new JLabel(labelText);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		container.add(label);
 		container.add(Box.createHorizontalGlue());
