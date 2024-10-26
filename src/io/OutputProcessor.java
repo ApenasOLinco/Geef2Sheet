@@ -15,8 +15,6 @@ import javax.imageio.stream.ImageOutputStream;
 import main.App;
 
 public class OutputProcessor {
-	private static final OutputConfigurations OUTPUT_CONFIGURATIONS = new OutputConfigurations();
-
 	private final ArrayList<File> outputFiles = new ArrayList<>();
 	
 	public void process(ArrayList<File> files) {
@@ -24,7 +22,7 @@ public class OutputProcessor {
 		
 		for(int i = 0; i < files.size(); i ++) {
 			File file = files.get(i);
-			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OUTPUT_CONFIGURATIONS.getFileFormat()}");
+			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OutputConfigurations.getFileFormat()}");
 			
 			if (outputFiles.contains(outputFile))
 				continue;
@@ -66,8 +64,8 @@ public class OutputProcessor {
 	private void writeImagesToFile(Image[] imgs, File outputFile) {
 		try {
 			// Configurations
-			int imagesPerLine = OUTPUT_CONFIGURATIONS.getNumberOfColumns();
-			String format = OUTPUT_CONFIGURATIONS.getFileFormat();
+			int imagesPerLine = OutputConfigurations.getNumberOfColumns();
+			String format = OutputConfigurations.getFileFormat();
 			
 			int imageWidth = imgs[0].getWidth(null);
 			int imageHeight = imgs[0].getHeight(null);
