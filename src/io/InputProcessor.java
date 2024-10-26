@@ -1,28 +1,17 @@
 package io;
 
-import io.event.IONotifier;
-import io.event.IONotifier.EventType;
-import main.App;
+import java.io.File;
+import java.util.ArrayList;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import io.event.IONotifier.EventType;
+import main.App;
 
 public class InputProcessor {
     private final ArrayList<File> inputFiles = new ArrayList<>();
 
-    public boolean addFiles(File... files) {
-        return addFiles(null, files);
-    }
-
-    public boolean addFiles(String[] formats, File @NotNull ... files) {
+    public boolean addFiles(File @NotNull ... files) {
         int addedFiles = 0;
 
         for(var file : files) {

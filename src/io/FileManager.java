@@ -1,11 +1,7 @@
 package io;
 
-import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 
 public class FileManager {
 	private final String INPUT_PATH = "io/input";
@@ -19,18 +15,6 @@ public class FileManager {
 		
 		if (!OUTPUT_FOLDER.exists())
 			System.out.println(OUTPUT_FOLDER.mkdirs());
-	}
-	
-	public Image getFileAsImage(File file) {
-		Image image;
-		
-		try {
-			image = ImageIO.read(file);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		
-		return image;
 	}
 	
 	public void createFiles(File... files) {
