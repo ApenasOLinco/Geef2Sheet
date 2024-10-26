@@ -44,10 +44,18 @@ public class OptionsPanel extends JPanel {
 		// Number Of Columns Spinner
 		createSpinner(numberOfColumnsSpinner, "Number of Columns: ");
 		numberOfColumnsSpinner.setValue(OutputConfigurations.getNumberOfColumns());
-
+		numberOfColumnsSpinner.addChangeListener(e -> {
+			int value = (int) numberOfColumnsSpinner.getValue();
+			OutputConfigurations.setNumberOfColumns(value);
+		});
+		
 		// Horizontal Spinner
 		createSpinner(horizontalGapSpinner, "Horizontal Gap: ");
 		horizontalGapSpinner.setValue(OutputConfigurations.gethGap());
+		horizontalGapSpinner.addChangeListener(e -> {
+			int value = (int) horizontalGapSpinner.getValue();
+			OutputConfigurations.sethGap(value);
+		});
 		
 		// Vertical Spinner
 		createSpinner(verticalGapSpinner, "Vertical Gap: ");
