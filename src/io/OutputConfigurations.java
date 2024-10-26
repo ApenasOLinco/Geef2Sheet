@@ -1,36 +1,38 @@
 package io;
 
 public final class OutputConfigurations {
-	private int 
+	private static int 
 		numberOfColumns = 15,
-		hGap = 0, vGap = 0;
-	private String fileFormat = "png";
+		hGap = 0,
+		vGap = 0;
 	
-	public int getNumberOfColumns() {
+	private static String fileFormat = "png";
+	
+	public static int getNumberOfColumns() {
 		return numberOfColumns;
 	}
 	
-	public int gethGap() {
+	public static int gethGap() {
 		return hGap;
 	}
 	
-	public int getvGap() {
+	public static int getvGap() {
 		return vGap;
 	}
 	
-	public void setNumberOfColumns(int numberOfColumns) {
-		this.numberOfColumns = numberOfColumns;
+	public static void setNumberOfColumns(int numberOfColumns) {
+		OutputConfigurations.numberOfColumns = numberOfColumns;
 	}
 	
-	public void sethGap(int hGap) {
-		this.hGap = hGap;
+	public static void sethGap(int hGap) {
+		OutputConfigurations.hGap = hGap;
 	}
 	
-	public void setvGap(int vGap) {
-		this.vGap = vGap;
+	public static void setvGap(int vGap) {
+		OutputConfigurations.vGap = vGap;
 	}
 
-	public String getFileFormat() {
+	public static String getFileFormat() {
 		return fileFormat;
 	}
 }
