@@ -2,17 +2,9 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.io.File;
 
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-
-import io.event.IONotifier.EventType;
-import main.App;
 
 public class OutputPanel extends JPanel {
 	private JSplitPane splitPane = new JSplitPane();
