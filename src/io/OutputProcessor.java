@@ -19,15 +19,17 @@ public class OutputProcessor {
 	
 	public void process(ArrayList<File> files) {
 		ArrayList<File> processedFiles = new ArrayList<>(files.size());
+		outputFiles.ensureCapacity(outputFiles.size() + files.size());
 		
 		for(int i = 0; i < files.size(); i ++) {
-			File file = files.get(i);
-			File outputFile = new File(STR."\{App.getFileManager().getOutputPath()}/\{file.getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OutputConfigurations.getFileFormat()}");
+			File inputFile = files.get(i);
+			File outputFile = 
+				new File(STR."\{App.getFileManager().getOutputPath()}/\{inputFile .getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OutputConfigurations.getFileFormat()}");
 			
 			if (outputFiles.contains(outputFile))
 				continue;
 			
-			var asImageArray = getGifFileAsImageArray(file);
+			var asImageArray = getGifFileAsImageArray(inputFile);
 			if(asImageArray != null)
 				writeImagesToFile(asImageArray, outputFile);
 			
