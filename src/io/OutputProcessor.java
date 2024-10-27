@@ -1,5 +1,7 @@
 package io;
 
+import static java.lang.StringTemplate.STR;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -73,7 +75,7 @@ public class OutputProcessor {
 			int vGap = OutputConfigurations.getvGap();
 			int imageWidth = imgs[0].getWidth(null);
 			int imageHeight = imgs[0].getHeight(null);
-			int lineWidth = imageWidth * imagesPerLine + hGap * imagesPerLine;
+			int lineWidth = imageWidth * Math.min(imagesPerLine, imgs.length) + hGap * imagesPerLine;
 			int lineHeight = imageHeight * (int) Math.ceil((double) imgs.length / imagesPerLine);
 			
 			BufferedImage outputImage = new BufferedImage(lineWidth, lineHeight, BufferedImage.TYPE_INT_ARGB);
