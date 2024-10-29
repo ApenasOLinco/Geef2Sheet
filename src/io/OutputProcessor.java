@@ -1,6 +1,7 @@
 package io;
 
 import static java.lang.StringTemplate.STR;
+import static main.App.getFileManager;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,18 +18,15 @@ import javax.imageio.stream.ImageOutputStream;
 import main.App;
 
 public class OutputProcessor {
-	private final ArrayList<File> outputFiles = new ArrayList<>();
-	
 	public void process(ArrayList<File> files) {
 		ArrayList<File> processedFiles = new ArrayList<>(files.size());
-		outputFiles.ensureCapacity(outputFiles.size() + files.size());
 		
 		for(int i = 0; i < files.size(); i ++) {
 			File inputFile = files.get(i);
 			File outputFile = 
 				new File(STR."\{App.getFileManager().getOutputPath()}/\{inputFile .getName().replaceAll("\\.[a-zA-Z]+", "")} Frames.\{OutputConfigurations.getFileFormat()}");
 			
-			if (outputFiles.contains(outputFile))
+			if (getFileManager().getCachedOutputFiles().containsKey(outputFile.getName()))
 				continue;
 			
 			var asImageArray = getGifFileAsImageArray(inputFile);
@@ -97,13 +95,9 @@ public class OutputProcessor {
 			writer.write(outputImage);
 			output.close();
 			writer.dispose();
-			getOutputFiles().add(outputFile);
+			getFileManager().cacheFile(outputFile);
 		} catch (IOException e) {
 			System.err.println(STR."Coudn't write file \{outputFile}: \n\{e.getMessage()} \n\{e.getStackTrace()}");
 		}
-	}
-	
-	public ArrayList<File> getOutputFiles() {
-		return outputFiles;
 	}
 }

@@ -2,14 +2,17 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 public class OutputPanel extends JPanel {
+	// Components
 	private JSplitPane splitPane = new JSplitPane();
 	private JPanel displayPanel = new JPanel(new BorderLayout());
 	private OutputLeftPanel leftPanel = new OutputLeftPanel(displayPanel);
+	
 	
 	public OutputPanel(Dimension size) {
 		setSize(size);
@@ -18,7 +21,11 @@ public class OutputPanel extends JPanel {
 		initLeftPanel();
 		initDisplayPanel();
 	}
-
+	
+	public void changeDisplayIcon() {
+		
+	}
+	
 	private void initSplitPane() {
 		splitPane.setContinuousLayout(true);
 		splitPane.setSize(getSize());

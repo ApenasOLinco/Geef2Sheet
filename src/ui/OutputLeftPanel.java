@@ -1,13 +1,11 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.io.File;
+import java.util.HashMap;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -15,7 +13,7 @@ import io.event.IONotifier.EventType;
 import main.App;
 
 public class OutputLeftPanel extends JPanel {
-	JList<File> outputJList = new JList<>();
+	JList<String> outputJList = new JList<>();
 	JPanel displayPanel;
 	
 	public OutputLeftPanel(JPanel displayPanel) {
@@ -25,17 +23,23 @@ public class OutputLeftPanel extends JPanel {
 	}
 
 	private void initJList() {
-		DefaultListModel<File> model = new DefaultListModel<>();
+		// TODO Terminar a implementação 
+		DefaultListModel<String> model = new DefaultListModel<>();
 		outputJList.setModel(model);
 		
 		outputJList.addListSelectionListener(e -> {
+			if(e.getValueIsAdjusting()) return; // Stops double calls from mouse input
+			
 			ScalableLabel label = (ScalableLabel) displayPanel.getComponent(0);
-			label.setIcon(new ImageIcon(outputJList.getSelectedValue().getPath()));
+			HashMap<String, File> cachedOutputFiles = App.getFileManager().getCachedOutputFiles();
+			
+			String fileName = outputJList.getSelectedValue();
+			label.setIcon(new ImageIcon(cachedOutputFiles.get(fileName).getPath()));
 		});
 		
 		App.getIONotifier().subscribe(event -> {
 			for(File file : event.getFiles()) {
-				model.addElement(file);
+				model.addElement(file.getName());
 			}
 			
 			App.getAppWindow().queueRepaint(outputJList);
