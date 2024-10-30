@@ -43,7 +43,6 @@ public class OutputLeftPanel extends JPanel {
 			}
 			
 			App.getAppWindow().queueRepaint(outputJList);
-			outputJList.revalidate();
 		}, EventType.FILES_PROCESSED);
 		
 		add(outputJList, BorderLayout.CENTER);
