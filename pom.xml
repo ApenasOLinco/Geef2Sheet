@@ -1,0 +1,28 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.apenasolinco</groupId>
+    <artifactId>geef2sheet-api</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <developers>
+        <developer>
+            <name>Lincoln Matos</name>
+            <email>lincoln.matos1003@gmail.com</email>
+            <roles>
+                <role>Creator</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>src/main/resources</resources>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <testResources>src/test/resources</testResources>
+        <outputDirectory>target/classes</outputDirectory>
+
+        <plugins>
+
+        </plugins>
+    </build>
+</project>
