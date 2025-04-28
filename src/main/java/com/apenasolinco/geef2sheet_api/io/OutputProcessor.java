@@ -1,4 +1,4 @@
-package io;
+package com.apenasolinco.geef2sheet_api.io;
 
 import static io.event.IONotifier.EventType.FILES_PROCESSED;
 import static java.lang.StringTemplate.STR;
@@ -17,7 +17,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
 
-import main.App;
+import App;
 
 public class OutputProcessor {
 	
