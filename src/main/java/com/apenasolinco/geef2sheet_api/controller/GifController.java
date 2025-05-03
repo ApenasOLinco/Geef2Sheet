@@ -26,7 +26,7 @@ public class GifController {
 		fileValidationService.validateContentType(file, MediaType.IMAGE_GIF);
 		fileValidationService.validateFileExtension(file, "gif");
 
-		var image = gifService.gifToImage(file);
+		var image = gifService.gifToSheet(file);
 
 		return ResponseEntity.ok()
 			.body("Recebida " + file.getOriginalFilename() + "\n");
