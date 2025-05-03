@@ -14,6 +14,8 @@ public class GifServiceImpl implements GifService {
 	@Override
 	public Image gifToImage(MultipartFile gif) {
 		Image result;
+	public File gifToSheet(MultipartFile gif) {
+		File result = new File("Sheet.png");
 
 		try (var inputStream = gif.getInputStream()) {
 
