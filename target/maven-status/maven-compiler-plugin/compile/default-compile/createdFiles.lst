@@ -1,0 +1,5 @@
+com/apenasolinco/geef2sheet_api/exception/InvalidFileTypeException.class
+com/apenasolinco/geef2sheet_api/service/GifService.class
+com/apenasolinco/geef2sheet_api/service/validation/FileValidationService.class
+com/apenasolinco/geef2sheet_api/service/impl/GifServiceImpl.class
+com/apenasolinco/geef2sheet_api/model/OutputConfigurations.class

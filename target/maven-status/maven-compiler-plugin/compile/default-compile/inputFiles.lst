@@ -1,0 +1,7 @@
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/App.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/controller/GifController.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/exception/InvalidFileTypeException.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/model/OutputConfigurations.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/service/GifService.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/service/impl/GifServiceImpl.java
+/home/apenasolinco/Documents/Github/Geef2Sheet/src/main/java/com/apenasolinco/geef2sheet_api/service/validation/FileValidationService.java

@@ -1,5 +1,6 @@
 package com.apenasolinco.geef2sheet_api.controller;
 
+import com.apenasolinco.geef2sheet_api.model.OutputConfigurations;
 import com.apenasolinco.geef2sheet_api.service.GifService;
 import com.apenasolinco.geef2sheet_api.service.validation.FileValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,19 @@ public class GifController {
 	@Autowired
 	private FileValidationService fileValidationService;
 
-	@PostMapping("/convert")
-	public ResponseEntity<String> gifToImage(
-		@RequestParam("gif")
-		MultipartFile file
+	@PostMapping(
+		value = "/convert",
+		produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE }
+	)
+	public ResponseEntity<byte[]> gifToImage(
+		@RequestParam("gif") MultipartFile file,
+		OutputConfigurations outputConfigurations
 	) {
 		fileValidationService.validateContentType(file, MediaType.IMAGE_GIF);
 		fileValidationService.validateFileExtension(file, "gif");
+		var sheet = gifService.gifToSheet(file, outputConfigurations);
 
-		var image = gifService.gifToSheet(file);
-
-		return ResponseEntity.ok()
-			.body("Recebida " + file.getOriginalFilename() + "\n");
+		return ResponseEntity.ok(sheet);
 	}
 
 	@GetMapping
